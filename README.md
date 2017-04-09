@@ -2,13 +2,13 @@
 
 ## 准备工作
 * 公网服务器一台并且安装docker
-* 域名一枚,做Ngrok服务器域名，如：ngrok.wlniao.com 
+* 域名一枚,做Ngrok服务器域名，如：ngrok.wln.io 
 * wlniao/ngrok Docker镜像
 * 拉取镜像 docker pull wlniao/ngrok
 
 ## 启动一个容器生成ngrok客户端,服务器端和CA证书
 ```linux
-docker run --rm -it -e DOMAIN="ngrok.wlniao.com" -v /data/ngrok:/wln wlniao/ngrok /bin/sh /build.sh
+docker run --rm -it -e DOMAIN="ngrok.wln.io" -v /data/ngrok:/wln wlniao/ngrok /bin/sh /build.sh
 ```
 当看到build ok !的时候,就可以在我们挂载的宿主目录/data/ngrok/bin下看到生成的客户端和服务端
 
@@ -34,7 +34,7 @@ bin/windows_amd64/ngrok.exe windows客户端
 * 下载我们生成的客户端（官方下载：https://ngrok.com/download）
 * 首先创建一个ngrok.cfg配置文件
 ```
-server_addr: "ngrok.wlniao.com:4443"
+server_addr: "ngrok.wln.io:4443"
 trust_host_root_certs: false
 tunnels:
   web:
