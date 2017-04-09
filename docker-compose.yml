@@ -1,11 +1,11 @@
 server:
   image: wlniao/ngrok
   ports:
-    - "8082:80"
-    - "4432:443"
+    - "80:80"
+    - "443:443"
     - "4443:4443"
   volumes:
     - /data/ngrok:/wln
   environment:
-    - DOMAIN="ngrok.wlniao.com"
+    - DOMAIN="ngrok.wln.io"
   command: /bin/sh /server.sh
