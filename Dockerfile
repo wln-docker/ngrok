@@ -4,7 +4,7 @@ MAINTAINER hteen <i@hteen.cn>
 ADD ./wln /wln
 ADD ./build.sh /build.sh
 ADD ./server.sh /server.sh
-RUN chmod -r 777 /build.sh && chmod -r 777 /server.sh
+RUN chmod 777 /build.sh && chmod 777 /server.sh
 RUN apk add --no-cache git make openssl
 RUN git clone https://github.com/tutumcloud/ngrok.git /ngrok
 
