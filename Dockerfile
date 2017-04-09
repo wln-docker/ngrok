@@ -1,10 +1,9 @@
 FROM golang:1.7.1-alpine
-MAINTAINER hteen <i@hteen.cn>
+MAINTAINER hteen <admin@wlniao.com>
 
+ADD *.sh /
 ADD ./wln /wln
-ADD ./build.sh /build.sh
-ADD ./server.sh /server.sh
-RUN chmod 777 /build.sh && chmod 777 /server.sh
+RUN chmod 777 /wln/bin/ngrokd
 RUN apk add --no-cache git make openssl
 RUN git clone https://github.com/tutumcloud/ngrok.git /ngrok
 
