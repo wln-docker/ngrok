@@ -1,11 +1,6 @@
 #!/bin/sh
 set -e
 
-if [ "${DOMAIN}" == "ngrok.wln.io" ]; then
-    echo "Please set DOMAIN"
-    exit 1
-fi
-
 cd ${MY_FILES}
 if [ ! -f "${MY_FILES}/base.pem" ]; then
     openssl genrsa -out base.key 2048
