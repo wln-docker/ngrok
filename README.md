@@ -20,7 +20,7 @@ bin/windows_amd64/ngrok.exe windows客户端
 ```
 
 ## 启动Ngrok server
-直接挂载刚刚的/data/ngrok到容器即可启动服务
+直接挂载刚刚的/data/ngrok到容器/wln目录即可启动服务
 
 ## 服务端参数说明
 ```

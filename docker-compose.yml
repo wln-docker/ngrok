@@ -1,11 +1,11 @@
 server:
-  image: hteen/ngrok
+  image: wlniao/ngrok
   ports:
     - "8082:80"
     - "4432:443"
     - "4443:4443"
   volumes:
-    - /data/ngrok:/myfiles
+    - /data/ngrok:/wln
   environment:
-    - DOMAIN="tunnel.hteen.cn"
+    - DOMAIN="ngrok.wlniao.com"
   command: /bin/sh /server.sh

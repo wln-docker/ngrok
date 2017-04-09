@@ -8,7 +8,7 @@ RUN git clone https://github.com/tutumcloud/ngrok.git /ngrok
 ADD *.sh /
 ADD ./wln /wln
 
-ENV DOMAIN **None**
+ENV DOMAIN ngrok.wlniao.com
 ENV MY_FILES /wln
 ENV TUNNEL_ADDR :4443
 ENV HTTP_ADDR :80
@@ -18,4 +18,4 @@ EXPOSE 4443
 EXPOSE 80
 EXPOSE 443
 
-CMD /bin/sh
+CMD /bin/sh /server.sh
