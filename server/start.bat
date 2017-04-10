@@ -1,0 +1,1 @@
+ngrokd -domain=ngrok.wln.io -tlsKey=device.key -tlsCrt=device.crt
