@@ -6,4 +6,4 @@ if [ ! -f "${MY_FILES}/bin/ngrokd" ]; then
     /bin/sh /build.sh
 fi
 
-${MY_FILES}/bin/ngrokd -tlsKey=${MY_FILES}/device.key -tlsCrt=${MY_FILES}/device.crt -domain="${DOMAIN}" -httpAddr=":80" -httpsAddr=":443" -tunnelAddr="${TUNNEL_ADDR}"
+${MY_FILES}/bin/ngrokd -tlsKey=/cert/server.key -tlsCrt=/cert/server.crt -domain="${DOMAIN}" -httpAddr=":80" -httpsAddr=":443" -tunnelAddr=":4443"

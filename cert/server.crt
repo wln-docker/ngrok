@@ -1,0 +1,104 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 2 (0x2)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=CN, ST=Chongqing, L=Chongqing, O=Chongqing Eming Technology Co., Ltd., OU=Chongqing Eming Technology Co., Ltd., CN=Wlniao CA/emailAddress=admin@wln.io
+        Validity
+            Not Before: Apr 13 15:07:47 2017 GMT
+            Not After : Apr 13 15:07:47 2018 GMT
+        Subject: C=CN, ST=Chongqing, O=Chongqing Eming Technology Co., Ltd., OU=Wlniao CN, CN=*.wlniao.cn/emailAddress=admin@wln.io
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:d3:03:cb:f0:01:d2:66:15:88:e0:7d:c2:12:84:
+                    1f:69:c2:67:f5:6d:6a:76:af:1c:bf:b8:88:01:fc:
+                    22:c1:ac:0f:3b:79:f2:30:4b:c4:45:6b:b6:87:5c:
+                    35:25:35:2c:d7:5e:22:53:0d:f3:a8:41:86:77:c1:
+                    b5:5e:96:8f:5b:0d:c1:13:f7:a6:7d:ec:5d:21:3f:
+                    e9:ea:e0:0f:41:20:30:ac:f5:d9:e8:69:cf:86:af:
+                    22:40:6b:76:e0:63:4b:02:52:1f:e4:71:24:22:6b:
+                    89:3f:d5:18:4f:5f:12:7b:a3:d1:01:3e:ed:c0:1a:
+                    42:78:66:b5:3e:3e:76:7d:f9:d6:86:33:83:32:bd:
+                    93:ca:17:6d:a7:95:be:71:98:15:72:1d:71:f7:9e:
+                    b8:c1:ea:84:fd:d4:d8:f4:08:a4:53:16:a8:e9:8e:
+                    cf:e0:d9:7e:2b:11:d7:a1:e9:49:12:ac:61:a0:de:
+                    b0:08:52:37:f9:21:9c:e1:fb:3f:77:b1:5f:ed:f4:
+                    82:7d:d7:f4:9f:55:80:40:b5:be:bf:3b:20:d6:fc:
+                    fd:95:b1:08:24:57:17:26:18:5d:e6:d1:15:92:17:
+                    fa:30:21:06:e8:a8:6f:06:ca:e2:fb:87:f8:f1:b6:
+                    75:1e:65:24:f5:a8:26:53:7e:38:32:26:76:ba:24:
+                    f4:ed
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier: 
+                65:0C:0A:DE:AF:2C:5A:D5:44:16:A8:2A:63:B5:68:F8:E5:2A:28:F7
+            X509v3 Authority Key Identifier: 
+                keyid:B0:94:93:81:C0:21:A6:48:A7:39:F5:11:68:84:62:0B:03:F6:EE:05
+
+    Signature Algorithm: sha256WithRSAEncryption
+         72:4a:19:bc:5a:f7:5f:9a:f4:7c:cd:7e:88:18:46:a6:b5:4f:
+         ba:80:10:92:ea:c0:5e:c9:c4:33:ef:e3:08:d0:74:dd:2b:56:
+         eb:59:68:68:44:03:d2:f6:66:8c:27:03:78:cf:0d:a4:b0:d4:
+         e1:53:f5:66:ce:63:c1:8e:7f:fc:20:59:e7:19:86:92:68:36:
+         53:87:2c:42:07:77:d7:37:ea:84:40:08:e6:14:be:d6:b7:9b:
+         cd:aa:62:63:30:77:04:3a:8a:ab:4a:a2:62:81:70:d2:95:24:
+         63:c0:68:5a:c1:cc:09:01:62:bd:01:52:75:15:23:65:6a:e4:
+         6d:ca:a8:36:7c:44:25:ba:39:4f:c2:81:cb:ec:17:94:17:e7:
+         74:f8:1b:59:25:f0:43:b0:b4:fd:7d:16:ef:8a:2c:d2:92:08:
+         ff:21:6a:70:7d:ba:9e:c4:30:e1:2f:42:9f:27:fe:5d:2b:1a:
+         da:a5:5c:3b:08:db:94:11:c6:3d:fd:89:d5:62:ec:03:bc:12:
+         a9:9d:85:30:c6:07:40:d0:0d:d5:9d:3c:38:ed:7f:0d:a0:74:
+         51:d8:f2:6d:1f:70:02:e2:ba:5b:92:2d:da:9a:56:e3:92:0d:
+         f6:41:d6:04:36:0d:6f:8f:b0:1d:f9:77:d2:12:30:43:fe:d6:
+         b4:64:a3:1e:10:ce:72:a2:be:97:a3:58:b3:e9:af:38:fe:c3:
+         60:81:98:50:11:b8:98:22:a8:c7:fb:00:99:b1:b9:16:d0:ee:
+         39:2c:8f:6d:24:64:fd:43:8b:b4:99:84:5b:b2:eb:94:d8:71:
+         1f:63:e8:98:31:c1:96:e6:51:63:6e:7e:36:f0:4a:5c:15:8e:
+         53:f6:c0:7f:f1:33:51:76:c5:70:17:4e:02:84:ab:61:b7:93:
+         a6:6a:bc:50:e0:85:1f:4e:9e:94:72:9e:54:39:0d:df:11:2d:
+         af:fe:f0:f7:4c:38:45:7a:db:43:b7:41:01:61:17:24:3c:c5:
+         66:56:76:a4:9c:cc:fa:1b:ff:34:33:20:cb:72:bf:0f:ed:ef:
+         9e:1d:d2:5c:40:d8:2c:c7:e7:d2:c1:1c:1b:e6:83:b1:d4:79:
+         80:e3:0d:e0:46:07:54:16:3d:2d:2d:34:5a:25:fb:cb:c6:42:
+         43:51:ab:c3:37:b8:df:4c:8b:90:75:3b:57:2e:f3:66:e6:9b:
+         55:f1:23:38:e9:67:0c:fa:25:d3:0e:15:33:bf:e7:c2:da:c6:
+         aa:90:bb:d1:5d:ea:dd:bd:d7:88:f1:1c:5a:f6:6b:0c:ef:f6:
+         b3:d8:f9:52:5d:6a:a1:a1:7e:5d:23:d7:ce:51:34:17:98:02:
+         99:dd:30:03:ce:87:5a:71
+-----BEGIN CERTIFICATE-----
+MIIFUzCCAzugAwIBAgIBAjANBgkqhkiG9w0BAQsFADCBxDELMAkGA1UEBhMCQ04x
+EjAQBgNVBAgMCUNob25ncWluZzESMBAGA1UEBwwJQ2hvbmdxaW5nMS0wKwYDVQQK
+DCRDaG9uZ3FpbmcgRW1pbmcgVGVjaG5vbG9neSBDby4sIEx0ZC4xLTArBgNVBAsM
+JENob25ncWluZyBFbWluZyBUZWNobm9sb2d5IENvLiwgTHRkLjESMBAGA1UEAwwJ
+V2xuaWFvIENBMRswGQYJKoZIhvcNAQkBFgxhZG1pbkB3bG4uaW8wHhcNMTcwNDEz
+MTUwNzQ3WhcNMTgwNDEzMTUwNzQ3WjCBlzELMAkGA1UEBhMCQ04xEjAQBgNVBAgM
+CUNob25ncWluZzEtMCsGA1UECgwkQ2hvbmdxaW5nIEVtaW5nIFRlY2hub2xvZ3kg
+Q28uLCBMdGQuMRIwEAYDVQQLDAlXbG5pYW8gQ04xFDASBgNVBAMMCyoud2xuaWFv
+LmNuMRswGQYJKoZIhvcNAQkBFgxhZG1pbkB3bG4uaW8wggEiMA0GCSqGSIb3DQEB
+AQUAA4IBDwAwggEKAoIBAQDTA8vwAdJmFYjgfcIShB9pwmf1bWp2rxy/uIgB/CLB
+rA87efIwS8RFa7aHXDUlNSzXXiJTDfOoQYZ3wbVelo9bDcET96Z97F0hP+nq4A9B
+IDCs9dnoac+GryJAa3bgY0sCUh/kcSQia4k/1RhPXxJ7o9EBPu3AGkJ4ZrU+PnZ9
++daGM4MyvZPKF22nlb5xmBVyHXH3nrjB6oT91Nj0CKRTFqjpjs/g2X4rEdeh6UkS
+rGGg3rAIUjf5IZzh+z93sV/t9IJ91/SfVYBAtb6/OyDW/P2VsQgkVxcmGF3m0RWS
+F/owIQboqG8GyuL7h/jxtnUeZST1qCZTfjgyJna6JPTtAgMBAAGjezB5MAkGA1Ud
+EwQCMAAwLAYJYIZIAYb4QgENBB8WHU9wZW5TU0wgR2VuZXJhdGVkIENlcnRpZmlj
+YXRlMB0GA1UdDgQWBBRlDAreryxa1UQWqCpjtWj45Soo9zAfBgNVHSMEGDAWgBSw
+lJOBwCGmSKc59RFohGILA/buBTANBgkqhkiG9w0BAQsFAAOCAgEAckoZvFr3X5r0
+fM1+iBhGprVPuoAQkurAXsnEM+/jCNB03StW61loaEQD0vZmjCcDeM8NpLDU4VP1
+Zs5jwY5//CBZ5xmGkmg2U4csQgd31zfqhEAI5hS+1rebzapiYzB3BDqKq0qiYoFw
+0pUkY8BoWsHMCQFivQFSdRUjZWrkbcqoNnxEJbo5T8KBy+wXlBfndPgbWSXwQ7C0
+/X0W74os0pII/yFqcH26nsQw4S9Cnyf+XSsa2qVcOwjblBHGPf2J1WLsA7wSqZ2F
+MMYHQNAN1Z08OO1/DaB0UdjybR9wAuK6W5It2ppW45IN9kHWBDYNb4+wHfl30hIw
+Q/7WtGSjHhDOcqK+l6NYs+mvOP7DYIGYUBG4mCKox/sAmbG5FtDuOSyPbSRk/UOL
+tJmEW7LrlNhxH2PomDHBluZRY25+NvBKXBWOU/bAf/EzUXbFcBdOAoSrYbeTpmq8
+UOCFH06elHKeVDkN3xEtr/7w90w4RXrbQ7dBAWEXJDzFZlZ2pJzM+hv/NDMgy3K/
+D+3vnh3SXEDYLMfn0sEcG+aDsdR5gOMN4EYHVBY9LS00WiX7y8ZCQ1Grwze430yL
+kHU7Vy7zZuabVfEjOOlnDPol0w4VM7/nwtrGqpC70V3q3b3XiPEcWvZrDO/2s9j5
+Ul1qoaF+XSPXzlE0F5gCmd0wA86HWnE=
+-----END CERTIFICATE-----

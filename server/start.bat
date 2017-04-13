@@ -1,1 +1,0 @@
-ngrokd -domain=wlniao.cn -tlsKey=device.key -tlsCrt=device.crt
