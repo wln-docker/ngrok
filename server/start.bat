@@ -1,0 +1,1 @@
+ngrokd -domain=wlniao.cn -tlsKey=server.key -tlsCrt=server.crt

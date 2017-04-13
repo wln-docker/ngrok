@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-cp -r /cert/ca.cer /ngrok/assets/client/tls/ngrokroot.crt
+cp -r /cert/ca.crt /ngrok/assets/client/tls/ngrokroot.crt
 cp -r /cert/server.crt /ngrok/assets/server/tls/snakeoil.crt
 cp -r /cert/server.key /ngrok/assets/server/tls/snakeoil.key
 
