@@ -13,4 +13,4 @@ EXPOSE 4443
 EXPOSE 443
 EXPOSE 80
 VOLUME ["/wln"]
-CMD /bin/sh /server.sh
+CMD /bin/sh /start.sh
