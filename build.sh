@@ -2,8 +2,8 @@
 set -e
 
 cp -r /cert/ca.cer /ngrok/assets/client/tls/ngrokroot.crt
-cp -r /cert/server.crt assets/server/tls/snakeoil.crt
-cp -r /cert/server.key assets/server/tls/snakeoil.key
+cp -r /cert/server.crt /ngrok/assets/server/tls/snakeoil.crt
+cp -r /cert/server.key /ngrok/assets/server/tls/snakeoil.key
 
 cd /ngrok
 make release-server
