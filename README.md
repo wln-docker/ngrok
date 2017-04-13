@@ -36,21 +36,30 @@ windows_amd64/ngrokd.exe  windows服务端
 * trust_host_root_certs #是否信任系统根证书，如果是带自签名证书编译的 ngrok 客户端，这个值应该设置为 false；如果使用 CA 证书，或者用户添加了根证书，这个值应该设置为 true
 * proto下协议为http时，lable为子域名
 ```
-server_addr: "ngrok.wln.io:4443"
+server_addr: "wlniao.cn:4443"
 trust_host_root_certs: false
 tunnels:
-  web4040:
+  hyper-v:
     proto:
       http: 4040
       https: 4040
-  tcp3389:
+  tcp8003:
     proto:
-      tcp: "3389"
-    remote_port: 3389
-  tcp5000:
+      tcp: "192.168.2.197:80"
+    remote_port: 8003
+    
+  tcp33389:
     proto:
-      tcp: 127.0.0.3:5000
-    remote_port: 5000
+      tcp: "192.168.2.197:3389"
+    remote_port: 33389
+  tcp43389:
+    proto:
+      tcp: "192.168.2.198:3389"
+    remote_port: 43389
+  tcp53389:
+    proto:
+      tcp: "192.168.2.199:3389"
+    remote_port: 53389
 ```
 
 ## 启动客户端命令
