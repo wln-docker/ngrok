@@ -8,4 +8,4 @@ server:
     - /data/ngrok:/wln
   environment:
     - DOMAIN="wlniao.cn"
-  command: /bin/sh /server.sh
+  command: /bin/sh /start.sh
