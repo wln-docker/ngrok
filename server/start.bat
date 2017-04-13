@@ -1,1 +1,1 @@
-ngrokd -domain=ngrok.wln.io -tlsKey=device.key -tlsCrt=device.crt
+ngrokd -domain=wlniao.cn -tlsKey=device.key -tlsCrt=device.crt

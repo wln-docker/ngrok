@@ -7,5 +7,5 @@ server:
   volumes:
     - /data/ngrok:/wln
   environment:
-    - DOMAIN="ngrok.wln.io"
+    - DOMAIN="wlniao.cn"
   command: /bin/sh /server.sh
