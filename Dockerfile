@@ -1,5 +1,5 @@
 FROM golang:1.7.1-alpine
-MAINTAINER wlniao <admin@wln.io>
+MAINTAINER abler <mail@xiechaoyi.com>
 
 ADD *.sh /
 ADD ./cert /cert

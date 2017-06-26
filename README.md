@@ -6,11 +6,11 @@
 * 生成自己的CA根证书及Ngrok域名证书，并覆盖cert目录中的ca.cer、server.crt及server.key文件
 * 拉取镜像 docker pull wlniao/ngrok
 
-## 启动一个容器生成ngrok客户端
+## 首先启动一个容器生成ngrok客户端
 ```linux
-docker run --rm -it -e DOMAIN="wlniao.cn" -v /data/ngrok:/wln wlniao/ngrok /bin/sh /server.sh
+docker run --rm -it -e DOMAIN="wlniao.cn" -v /docker/ngrok:/wln wlniao/ngrok /bin/sh /start.sh
 ```
-当看到build ok !的时候,就可以在我们挂载的宿主目录/data/ngrok下看到生成的客户端和服务端
+当看到build ok !的时候,就可以在我们挂载的宿主目录/docker/ngrok下看到生成的客户端和服务端
 
 ```
 ngrok                     linux客户端
@@ -20,7 +20,10 @@ windows_amd64/ngrokd.exe  windows服务端
 ```
 
 ## 启动Ngrok server
-直接挂载刚刚的/data/ngrok到容器/wln目录即可启动服务
+直接挂载刚刚的/docker/ngrok到容器/wln目录即可启动服务
+```linux
+docker run -d -e DOMAIN="wlniao.cn" -v /docker/ngrok:/wln wlniao/ngrok /bin/sh /start.sh
+```
 
 ## 服务端参数说明
 ```
@@ -39,27 +42,9 @@ windows_amd64/ngrokd.exe  windows服务端
 server_addr: "wlniao.cn:4443"
 trust_host_root_certs: false
 tunnels:
-  hyper-v:
+  test:
     proto:
-      http: 4040
-      https: 4040
-  tcp8003:
-    proto:
-      tcp: "192.168.2.197:80"
-    remote_port: 8003
-    
-  tcp33389:
-    proto:
-      tcp: "192.168.2.197:3389"
-    remote_port: 33389
-  tcp43389:
-    proto:
-      tcp: "192.168.2.198:3389"
-    remote_port: 43389
-  tcp53389:
-    proto:
-      tcp: "192.168.2.199:3389"
-    remote_port: 53389
+      http: 80
 ```
 
 ## 启动客户端命令
