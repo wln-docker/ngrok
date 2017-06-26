@@ -22,7 +22,7 @@ windows_amd64/ngrokd.exe  windows服务端
 ## 启动Ngrok server
 直接挂载刚刚的/docker/ngrok到容器/wln目录即可启动服务
 ```linux
-docker run -d -e DOMAIN="wlniao.cn" -v /docker/ngrok:/wln wlniao/ngrok /bin/sh /start.sh
+docker run -d -p 4443:4443 -e DOMAIN="wlniao.cn" -v /docker/ngrok:/wln wlniao/ngrok
 ```
 
 ## 服务端参数说明
