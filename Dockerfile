@@ -6,7 +6,7 @@ ADD ./cert /cert
 ADD ./ngrok /ngrok
 RUN apk add --no-cache git make openssl
 
-ENV DOMAIN wlniao.cn
+ENV DOMAIN wlniao.net
 ENV MY_FILES /wln
 
 EXPOSE 4443

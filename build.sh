@@ -16,7 +16,7 @@ GOOS=windows GOARCH=386 make release-server
 GOOS=windows GOARCH=amd64 make release-server
 #GOOS=darwin GOARCH=386 make release-client
 #GOOS=darwin GOARCH=amd64 make release-client
-#GOOS=linux GOARCH=arm make release-client
+GOOS=linux GOARCH=arm make release-client
 
 cp -rf /ngrok/bin/* ${MY_FILES}
 
