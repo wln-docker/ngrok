@@ -3,7 +3,7 @@
 ## 准备工作
 * 公网服务器一台并且安装docker
 * 域名一枚,做Ngrok服务器域名，如：wlniao.net
-* 生成自己的CA根证书及Ngrok域名证书，并覆盖cert目录中的ca.cer、server.crt及server.key文件
+* 生成自己的CA根证书及Ngrok域名证书，并覆盖cert目录中的ca.crt、server.crt及server.key文件
 * 拉取镜像 docker pull wlniao/ngrok
 
 ## 首先启动一个容器生成ngrok客户端
@@ -34,7 +34,6 @@ docker run -d -p 4443:4443 -e DOMAIN="wlniao.net" -v /docker/ngrok:/wln wlniao/n
 ```
 
 ## 客户端连接
-* 下载我们生成的客户端（官方下载：https://ngrok.com/download）
 * 首先创建一个ngrok.cfg配置文件
 * trust_host_root_certs #是否信任系统根证书，如果是带自签名证书编译的 ngrok 客户端，这个值应该设置为 false；如果使用 CA 证书，或者用户添加了根证书，这个值应该设置为 true
 * proto下协议为http时，lable为子域名
