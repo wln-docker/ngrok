@@ -14,11 +14,13 @@ import (
 func init() {
 	if runtime.GOOS == "windows" {
 		if mousetrap.StartedByExplorer() {
-			fmt.Println("Don't double-click ngrok!")
-			fmt.Println("You need to open cmd.exe and run it from the command line!")
+			fmt.Println("请不要直接双击运行ngrok!")
+			fmt.Println("你需要打开cmd.exe并从命令行中运行!")
 			time.Sleep(5 * time.Second)
 			os.Exit(1)
+
 		}
+
 	}
 }
 
@@ -43,7 +45,7 @@ func Main() {
 	// seed random number generator
 	seed, err := util.RandomSeed()
 	if err != nil {
-		fmt.Printf("Couldn't securely seed the random number generator!")
+		fmt.Printf("无法安全地生成随机数生成器！")
 		os.Exit(1)
 	}
 	rand.Seed(seed)

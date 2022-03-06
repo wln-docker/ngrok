@@ -46,12 +46,12 @@ func NewTunnelRegistry(cacheSize uint64, cacheFile string) *TunnelRegistry {
 	if cacheFile != "" {
 		err := registry.affinity.LoadItemsFromFile(cacheFile)
 		if err != nil {
-			registry.Error("Failed to load affinity cache %s: %v", cacheFile, err)
+			registry.Error("无法加载关联缓存 %s: %v", cacheFile, err)
 		}
 
 		registry.SaveCacheThread(cacheFile, cacheSaveInterval)
 	} else {
-		registry.Info("No affinity cache specified")
+		registry.Info("未指定关联缓存")
 	}
 
 	return registry
@@ -60,16 +60,16 @@ func NewTunnelRegistry(cacheSize uint64, cacheFile string) *TunnelRegistry {
 // Spawns a goroutine the periodically saves the cache to a file.
 func (r *TunnelRegistry) SaveCacheThread(path string, interval time.Duration) {
 	go func() {
-		r.Info("Saving affinity cache to %s every %s", path, interval.String())
+		r.Info("将关联性缓存保存到 %s 每 %s", path, interval.String())
 		for {
 			time.Sleep(interval)
 
-			r.Debug("Saving affinity cache")
+			r.Debug("保存关联缓存")
 			err := r.affinity.SaveItemsToFile(path)
 			if err != nil {
-				r.Error("Failed to save affinity cache: %v", err)
+				r.Error("无法保存关联缓存: %v", err)
 			} else {
-				r.Info("Saved affinity cache")
+				r.Info("保存的关联缓存")
 			}
 		}
 	}()
@@ -82,7 +82,7 @@ func (r *TunnelRegistry) Register(url string, t *Tunnel) error {
 	defer r.Unlock()
 
 	if r.tunnels[url] != nil {
-		return fmt.Errorf("The tunnel %s is already registered.", url)
+		return fmt.Errorf("隧道 %s 已注册.", url)
 	}
 
 	r.tunnels[url] = t
@@ -94,8 +94,8 @@ func (r *TunnelRegistry) cacheKeys(t *Tunnel) (ip string, id string) {
 	clientIp := t.ctl.conn.RemoteAddr().(*net.TCPAddr).IP.String()
 	clientId := t.ctl.id
 
-	ipKey := fmt.Sprintf("client-ip-%s:%s", t.req.Protocol, clientIp)
-	idKey := fmt.Sprintf("client-id-%s:%s", t.req.Protocol, clientId)
+	ipKey := fmt.Sprintf("客户端-ip-%s:%s", t.req.Protocol, clientIp)
+	idKey := fmt.Sprintf("客户端-id-%s:%s", t.req.Protocol, clientId)
 	return ipKey, idKey
 }
 
@@ -106,10 +106,10 @@ func (r *TunnelRegistry) GetCachedRegistration(t *Tunnel) (url string) {
 	// not be specific to a user because of NATs
 	if v, ok := r.affinity.Get(idCacheKey); ok {
 		url = string(v.(cacheUrl))
-		t.Debug("Found registry affinity %s for %s", url, idCacheKey)
+		t.Debug("找到注册表关联性 %s 为 %s", url, idCacheKey)
 	} else if v, ok := r.affinity.Get(ipCacheKey); ok {
 		url = string(v.(cacheUrl))
-		t.Debug("Found registry affinity %s for %s", url, ipCacheKey)
+		t.Debug("找到注册表关联性 %s 为 %s", url, ipCacheKey)
 	}
 	return
 }
@@ -145,7 +145,7 @@ func (r *TunnelRegistry) RegisterRepeat(urlFn func() string, t *Tunnel) (string,
 		}
 	}
 
-	return "", fmt.Errorf("Failed to assign a URL after %d attempts!", maxAttempts)
+	return "", fmt.Errorf("在 %d 次尝试后无法分配网址！", maxAttempts)
 }
 
 func (r *TunnelRegistry) Del(url string) {
@@ -190,7 +190,7 @@ func (r *ControlRegistry) Add(clientId string, ctl *Control) (oldCtl *Control) {
 	}
 
 	r.controls[clientId] = ctl
-	r.Info("Registered control with id %s", clientId)
+	r.Info("注册控制ID %s", clientId)
 	return
 }
 
@@ -198,9 +198,9 @@ func (r *ControlRegistry) Del(clientId string) error {
 	r.Lock()
 	defer r.Unlock()
 	if r.controls[clientId] == nil {
-		return fmt.Errorf("No control found for client id: %s", clientId)
+		return fmt.Errorf("找不到客户端ID: %s 的控制", clientId)
 	} else {
-		r.Info("Removed control registry id %s", clientId)
+		r.Info("注册ID %s 已移除控制", clientId)
 		delete(r.controls, clientId)
 		return nil
 	}

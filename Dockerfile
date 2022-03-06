@@ -1,4 +1,4 @@
-FROM golang:1.17.3-alpine
+FROM golang:1.17.8-alpine
 MAINTAINER abler <mail@xiechaoyi.com>
 
 ADD *.sh /

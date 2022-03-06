@@ -59,7 +59,7 @@ func registerVhost(t *Tunnel, protocol string, servingPort int) (err error) {
 	// Canonicalize virtual host by removing default port (e.g. :80 on HTTP)
 	defaultPort, ok := defaultPortMap[protocol]
 	if !ok {
-		return fmt.Errorf("Couldn't find default port for protocol %s", protocol)
+		return fmt.Errorf("无法找到协议的默认端口 %s", protocol)
 	}
 
 	defaultPortSuffix := fmt.Sprintf(":%d", defaultPort)
@@ -107,7 +107,7 @@ func NewTunnel(m *msg.ReqTunnel, ctl *Control) (t *Tunnel, err error) {
 	case "tcp":
 		bindTcp := func(port int) error {
 			if t.listener, err = net.ListenTCP("tcp", &net.TCPAddr{IP: net.ParseIP("0.0.0.0"), Port: port}); err != nil {
-				err = t.ctl.conn.Error("Error binding TCP listener: %v", err)
+				err = t.ctl.conn.Error("绑定TCP出错: %v", err)
 				return err
 			}
 
@@ -120,7 +120,7 @@ func NewTunnel(m *msg.ReqTunnel, ctl *Control) (t *Tunnel, err error) {
 				// This should never be possible because the OS will
 				// only assign available ports to us.
 				t.listener.Close()
-				err = fmt.Errorf("TCP listener bound, but failed to register %s", t.url)
+				err = fmt.Errorf("TCP侦听绑定，但未能注册 %s", t.url)
 				return err
 			}
 
@@ -142,11 +142,11 @@ func NewTunnel(m *msg.ReqTunnel, ctl *Control) (t *Tunnel, err error) {
 			portPart := parts[len(parts)-1]
 			port, err = strconv.Atoi(portPart)
 			if err != nil {
-				t.ctl.conn.Error("Failed to parse cached url port as integer: %s", portPart)
+				t.ctl.conn.Error("无法将缓存网址端口解析为整数: %s", portPart)
 			} else {
 				// we have a valid, cached port, let's try to bind with it
 				if bindTcp(port) != nil {
-					t.ctl.conn.Warn("Failed to get custom port %d: %v, trying a random one", port, err)
+					t.ctl.conn.Warn("无法获取自定义端口 %d: %v, 尝试一个随机的", port, err)
 				} else {
 					// success, we're done
 					return
@@ -161,7 +161,7 @@ func NewTunnel(m *msg.ReqTunnel, ctl *Control) (t *Tunnel, err error) {
 	case "http", "https":
 		l, ok := listeners[proto]
 		if !ok {
-			err = fmt.Errorf("Not listening for %s connections", proto)
+			err = fmt.Errorf("不侦听 %s 连接", proto)
 			return
 		}
 
@@ -170,7 +170,7 @@ func NewTunnel(m *msg.ReqTunnel, ctl *Control) (t *Tunnel, err error) {
 		}
 
 	default:
-		err = fmt.Errorf("Protocol %s is not supported", proto)
+		err = fmt.Errorf("协议 %s 不支持", proto)
 		return
 	}
 
@@ -180,14 +180,14 @@ func NewTunnel(m *msg.ReqTunnel, ctl *Control) (t *Tunnel, err error) {
 	}
 
 	t.AddLogPrefix(t.Id())
-	t.Info("Registered new tunnel on: %s", t.ctl.conn.Id())
+	t.Info("注册新的隧道: %s", t.ctl.conn.Id())
 
 	metrics.OpenTunnel(t)
 	return
 }
 
 func (t *Tunnel) Shutdown() {
-	t.Info("Shutting down")
+	t.Info("正在关闭")
 
 	// mark that we're shutting down
 	atomic.StoreInt32(&t.closing, 1)
@@ -217,7 +217,7 @@ func (t *Tunnel) listenTcp(listener *net.TCPListener) {
 	for {
 		defer func() {
 			if r := recover(); r != nil {
-				log.Warn("listenTcp failed with error %v", r)
+				log.Warn("侦听Tcp失败，出现错误 %v", r)
 			}
 		}()
 
@@ -230,13 +230,13 @@ func (t *Tunnel) listenTcp(listener *net.TCPListener) {
 				return
 			}
 
-			t.Error("Failed to accept new TCP connection: %v", err)
+			t.Error("无法接受新的TCP连接: %v", err)
 			continue
 		}
 
 		conn := conn.Wrap(tcpConn, "pub")
 		conn.AddLogPrefix(t.Id())
-		conn.Info("New connection from %v", conn.RemoteAddr())
+		conn.Info("新连接来自 %v", conn.RemoteAddr())
 
 		go t.HandlePublicConnection(conn)
 	}
@@ -246,7 +246,7 @@ func (t *Tunnel) HandlePublicConnection(publicConn conn.Conn) {
 	defer publicConn.Close()
 	defer func() {
 		if r := recover(); r != nil {
-			publicConn.Warn("HandlePublicConnection failed with error %v", r)
+			publicConn.Warn("处理公共连接失败，出现错误 %v", r)
 		}
 	}()
 
@@ -258,11 +258,11 @@ func (t *Tunnel) HandlePublicConnection(publicConn conn.Conn) {
 	for i := 0; i < (2 * proxyMaxPoolSize); i++ {
 		// get a proxy connection
 		if proxyConn, err = t.ctl.GetProxy(); err != nil {
-			t.Warn("Failed to get proxy connection: %v", err)
+			t.Warn("无法获取代理连接: %v", err)
 			return
 		}
 		defer proxyConn.Close()
-		t.Info("Got proxy connection %s", proxyConn.Id())
+		t.Info("获得代理连接 %s", proxyConn.Id())
 		proxyConn.AddLogPrefix(t.Id())
 
 		// tell the client we're going to start using this proxy connection
@@ -272,7 +272,7 @@ func (t *Tunnel) HandlePublicConnection(publicConn conn.Conn) {
 		}
 
 		if err = msg.WriteMsg(proxyConn, startPxyMsg); err != nil {
-			proxyConn.Warn("Failed to write StartProxyMessage: %v, attempt %d", err, i)
+			proxyConn.Warn("无法写入启动代理消息: %v, 尝试 %d", err, i)
 			proxyConn.Close()
 		} else {
 			// success
@@ -282,7 +282,7 @@ func (t *Tunnel) HandlePublicConnection(publicConn conn.Conn) {
 
 	if err != nil {
 		// give up
-		publicConn.Error("Too many failures starting proxy connection")
+		publicConn.Error("启动代理连接的故障太多")
 		return
 	}
 

@@ -85,7 +85,7 @@ func (h *Http) readRequests(tee *conn.Tee, lastTxn chan *HttpTxn, connCtx interf
 
 		h.reqMeter.Mark(1)
 		if err != nil {
-			tee.Warn("Failed to extract request body: %v", err)
+			tee.Warn("无法提取请求正文: %v", err)
 		}
 
 		// golang's ReadRequest/DumpRequestOut is broken. Fix up the request so it works later
@@ -97,7 +97,7 @@ func (h *Http) readRequests(tee *conn.Tee, lastTxn chan *HttpTxn, connCtx interf
 		if req.Body != nil {
 			txn.Req.BodyBytes, txn.Req.Body, err = extractBody(req.Body)
 			if err != nil {
-				tee.Warn("Failed to extract request body: %v", err)
+				tee.Warn("无法提取请求正文: %v", err)
 			}
 		}
 
@@ -112,7 +112,7 @@ func (h *Http) readResponses(tee *conn.Tee, lastTxn chan *HttpTxn) {
 		txn.Duration = time.Since(txn.Start)
 		h.reqTimer.Update(txn.Duration)
 		if err != nil {
-			tee.Warn("Error reading response from server: %v", err)
+			tee.Warn("读取响应时出错从服务器: %v", err)
 			// no more responses to be read, we're done
 			break
 		}
@@ -125,7 +125,7 @@ func (h *Http) readResponses(tee *conn.Tee, lastTxn chan *HttpTxn) {
 		if resp.Body != nil {
 			txn.Resp.BodyBytes, txn.Resp.Body, err = extractBody(resp.Body)
 			if err != nil {
-				tee.Warn("Failed to extract response body: %v", err)
+				tee.Warn("无法提取响应正文: %v", err)
 			}
 		}
 

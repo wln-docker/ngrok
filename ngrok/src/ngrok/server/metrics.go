@@ -126,31 +126,31 @@ func (m *LocalMetrics) CloseConnection(t *Tunnel, c conn.Conn, start time.Time, 
 }
 
 func (m *LocalMetrics) Report() {
-	m.Info("Reporting every %d seconds", int(m.reportInterval.Seconds()))
+	m.Debug("每 %d 秒报告一次", int(m.reportInterval.Seconds()))
 
 	for {
 		time.Sleep(m.reportInterval)
 		buffer, err := json.Marshal(map[string]interface{}{
-			"windows":               m.windowsCounter.Count(),
-			"linux":                 m.linuxCounter.Count(),
-			"osx":                   m.osxCounter.Count(),
-			"other":                 m.otherCounter.Count(),
-			"httpTunnelMeter.count": m.httpTunnelMeter.Count(),
-			"tcpTunnelMeter.count":  m.tcpTunnelMeter.Count(),
-			"tunnelMeter.count":     m.tunnelMeter.Count(),
-			"tunnelMeter.m1":        m.tunnelMeter.Rate1(),
-			"connMeter.count":       m.connMeter.Count(),
-			"connMeter.m1":          m.connMeter.Rate1(),
-			"bytesIn.count":         m.bytesInCount.Count(),
-			"bytesOut.count":        m.bytesOutCount.Count(),
+			"windows": m.windowsCounter.Count(),
+			"linux":   m.linuxCounter.Count(),
+			"osx":     m.osxCounter.Count(),
+			"other":   m.otherCounter.Count(),
+			"http隧道数": m.httpTunnelMeter.Count(),
+			"tcp隧道数":  m.tcpTunnelMeter.Count(),
+			"隧道总数":    m.tunnelMeter.Count(),
+			"隧道率":     m.tunnelMeter.Rate1(),
+			"连接数":     m.connMeter.Count(),
+			"连接率":     m.connMeter.Rate1(),
+			"接收字节数":   m.bytesInCount.Count(),
+			"发送字节数":   m.bytesOutCount.Count(),
 		})
 
 		if err != nil {
-			m.Error("Failed to serialize metrics: %v", err)
+			m.Error("无法序列化指标: %v", err)
 			continue
 		}
 
-		m.Info("Reporting: %s", buffer)
+		m.Debug("报告: %s", buffer)
 	}
 }
 
@@ -169,7 +169,7 @@ type KeenIoMetrics struct {
 
 func NewKeenIoMetrics(batchInterval time.Duration) *KeenIoMetrics {
 	k := &KeenIoMetrics{
-		Logger:       log.NewPrefixLogger("metrics"),
+		Logger:       log.NewPrefixLogger("指标"),
 		ApiKey:       os.Getenv("KEEN_API_KEY"),
 		ProjectToken: os.Getenv("KEEN_PROJECT_TOKEN"),
 		Metrics:      make(chan *KeenIoMetric, 1000),
@@ -178,7 +178,7 @@ func NewKeenIoMetrics(batchInterval time.Duration) *KeenIoMetrics {
 	go func() {
 		defer func() {
 			if r := recover(); r != nil {
-				k.Error("KeenIoMetrics failed: %v", r)
+				k.Error("KeenIo指标失败: %v", r)
 			}
 		}()
 
@@ -202,10 +202,10 @@ func NewKeenIoMetrics(batchInterval time.Duration) *KeenIoMetrics {
 
 				payload, err := json.Marshal(batch)
 				if err != nil {
-					k.Error("Failed to serialize metrics payload: %v, %v", batch, err)
+					k.Error("无法序列化指标有效内容: %v, %v", batch, err)
 				} else {
 					for key, val := range batch {
-						k.Debug("Reporting %d metrics for %s", len(val), key)
+						k.Debug("报告  %s 的 %d 指标", len(val), key)
 					}
 
 					k.AuthedRequest("POST", "/events", bytes.NewReader(payload))
@@ -236,13 +236,13 @@ func (k *KeenIoMetrics) AuthedRequest(method, path string, body *bytes.Reader) (
 	resp, err = k.HttpClient.Do(req)
 
 	if err != nil {
-		k.Error("Failed to send metric event to keen.io %v", err)
+		k.Error("无法将指标事件发送到 keen.io %v", err)
 	} else {
-		k.Info("keen.io processed request in %f sec", time.Since(requestStartAt).Seconds())
+		k.Info("keen.io 处理的请求 %f 秒", time.Since(requestStartAt).Seconds())
 		defer resp.Body.Close()
 		if resp.StatusCode != 200 {
 			bytes, _ := ioutil.ReadAll(resp.Body)
-			k.Error("Got %v response from keen.io: %s", resp.StatusCode, bytes)
+			k.Error("获得 %v 响应， 从 keen.io: %s", resp.StatusCode, bytes)
 		}
 	}
 

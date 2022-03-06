@@ -56,7 +56,7 @@ func (v *HttpView) Run() {
 	for {
 		select {
 		case txn := <-updates:
-			v.Debug("Got HTTP update")
+			v.Debug("有HTTP更新")
 			if txn.(*proto.HttpTxn).Resp == nil {
 				v.HttpRequests.Add(txn)
 			}
@@ -67,7 +67,7 @@ func (v *HttpView) Run() {
 
 func (v *HttpView) Render() {
 	v.Clear()
-	v.Printf(0, 0, "HTTP Requests")
+	v.Printf(0, 0, "网页请求")
 	v.Printf(0, 1, "-------------")
 	for i, obj := range v.HttpRequests.Slice() {
 		txn := obj.(*proto.HttpTxn)

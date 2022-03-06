@@ -46,13 +46,13 @@ func NewTermView(ctl mvc.Controller) *TermView {
 func connStatusRepr(status mvc.ConnStatus) (string, termbox.Attribute) {
 	switch status {
 	case mvc.ConnConnecting:
-		return "connecting", termbox.ColorCyan
+		return "正在连接", termbox.ColorCyan
 	case mvc.ConnReconnecting:
-		return "reconnecting", termbox.ColorRed
+		return "正在重连", termbox.ColorRed
 	case mvc.ConnOnline:
-		return "online", termbox.ColorGreen
+		return "在线", termbox.ColorGreen
 	}
-	return "unknown", termbox.ColorWhite
+	return "未知", termbox.ColorWhite
 }
 
 func (v *TermView) draw() {
@@ -61,8 +61,8 @@ func (v *TermView) draw() {
 	v.Clear()
 
 	// quit instructions
-	quitMsg := "(Ctrl+C to quit)"
-	v.Printf(v.w-len(quitMsg), 0, quitMsg)
+	quitMsg := "Ctrl+C 退出   "
+	v.Printf(v.w-len(quitMsg), 1, quitMsg)
 
 	// new version message
 	updateStatus := state.GetUpdateStatus()
@@ -71,11 +71,11 @@ func (v *TermView) draw() {
 	case mvc.UpdateNone:
 		updateMsg = ""
 	case mvc.UpdateInstalling:
-		updateMsg = "ngrok is updating"
+		updateMsg = "ngrok正在更新"
 	case mvc.UpdateReady:
-		updateMsg = "ngrok has updated: restart ngrok for the new version"
+		updateMsg = "ngrok已经更新，请重启新版本ngrok"
 	case mvc.UpdateAvailable:
-		updateMsg = "new version available at https://ngrok.com"
+		updateMsg = "新版本在 http://ngrok.chengang.win"
 	default:
 		pct := float64(updateStatus) / 100.0
 		const barLength = 25
@@ -90,30 +90,30 @@ func (v *TermView) draw() {
 				bar[i+1] = ' '
 			}
 		}
-		updateMsg = "Downloading update: " + string(bar)
+		updateMsg = "正在下载更新: " + string(bar)
 	}
 
 	if updateMsg != "" {
 		v.APrintf(termbox.ColorYellow, 30, 0, updateMsg)
 	}
 
-	v.APrintf(termbox.ColorBlue|termbox.AttrBold, 0, 0, "ngrok")
+	v.APrintf(termbox.ColorBlue|termbox.AttrBold, 0, 1, " www.lu8.win")
 	statusStr, statusColor := connStatusRepr(state.GetConnStatus())
-	v.APrintf(statusColor, 0, 2, "%-30s%s", "Tunnel Status", statusStr)
+	v.APrintf(statusColor, 0, 3, "%-15s%s", "隧道状态", statusStr)
 
-	v.Printf(0, 3, "%-30s%s/%s", "Version", state.GetClientVersion(), state.GetServerVersion())
-	var i int = 4
+	v.Printf(0, 4, "%-15s%s/%s", "版本信息", state.GetClientVersion(), state.GetServerVersion())
+	var i int = 5
 	for _, t := range state.GetTunnels() {
-		v.Printf(0, i, "%-30s%s -> %s", "Forwarding", t.PublicUrl, t.LocalAddr)
+		v.Printf(0, i, "%-15s%s -> %s", "转发详情", t.PublicUrl, t.LocalAddr)
 		i++
 	}
-	v.Printf(0, i+0, "%-30s%s", "Web Interface", v.ctl.GetWebInspectAddr())
+	v.Printf(0, i+0, "%-15s%s", "状态界面", v.ctl.GetWebInspectAddr())
 
 	connMeter, connTimer := state.GetConnectionMetrics()
-	v.Printf(0, i+1, "%-30s%d", "# Conn", connMeter.Count())
+	v.Printf(0, i+1, "%-15s%d", "连接次数", connMeter.Count())
 
 	msec := float64(time.Millisecond)
-	v.Printf(0, i+2, "%-30s%.2fms", "Avg Conn Time", connTimer.Mean()/msec)
+	v.Printf(0, i+2, "%-15s%.2fms", "平均时间", connTimer.Mean()/msec)
 
 	termbox.Flush()
 }
@@ -127,7 +127,7 @@ func (v *TermView) run() {
 
 	v.draw()
 	for {
-		v.Debug("Waiting for update")
+		v.Debug("等待更新")
 		select {
 		case <-v.flush:
 			termbox.Flush()
@@ -164,12 +164,12 @@ func (v *TermView) input() {
 		case termbox.EventKey:
 			switch ev.Key {
 			case termbox.KeyCtrlC:
-				v.Info("Got quit command")
+				v.Info("有退出命令")
 				v.ctl.Shutdown("")
 			}
 
 		case termbox.EventResize:
-			v.Info("Resize event, redrawing")
+			v.Info("重新调整大小")
 			v.redraw.In() <- 1
 
 		case termbox.EventError:
